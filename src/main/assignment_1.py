@@ -89,13 +89,13 @@ current_itteration = 1
 while(abs(infinite_series(1, current_itteration)) > min_error):
   current_itteration += 1 
 
-print(current_itteration)
+print(current_itteration - 1)
 print("\n")
 
 #Number 6
 import numpy as np
 def func(x):
-    return x*x*x - 4*x*x - 10
+    return ((x**3) - (4*(x**2)) - 10)
 def my_bisection(f, a, b, tol): 
     if np.sign(f(a)) == np.sign(f(b)):
       raise Exception(
@@ -113,14 +113,17 @@ def my_bisection(f, a, b, tol):
         # Make recursive call with b = m
         return my_bisection(f, a, m, tol)
 def my_newton(f, df, x0, tol):
-   
-    if abs(f(x0)) < tol:
-        return x0
-    else:
-        return my_newton(f, df, x0 - f(x0)/df(x0), tol)
-f = lambda x: x*x*x - 4*x*x - 10     
-f_prime = lambda x: 3*x*x - 8*x 
+  result = f(x0) / df(x0)
+  x = x0
+  count = 1
+  while(abs(result) >= tol):
+    x -= result
+    count += 1
+    result = f(x)/ df(x)
+  return count
+f_x = lambda x: (x**3) - (4* (x**2)) - 10
+f_prime = lambda x: 3 * (x**2) - (8 * x)
 
-print(my_bisection(f, -4, 7, .0001))
-print(my_newton(f, f_prime, 7, .0001))
+print(my_bisection(f_x, -4, 7, .0001))
+print(my_newton(f_x, f_prime, 7, .0001))
 
