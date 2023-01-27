@@ -95,7 +95,7 @@ print("\n")
 #Number 6
 import numpy as np
 def func(x):
-    return ((x**3) - (4*(x**2)) - 10)
+    return ((x**3) + (4*(x**2)) - 10)
 def my_bisection(f, a, b, tol): 
     if np.sign(f(a)) == np.sign(f(b)):
       raise Exception(
