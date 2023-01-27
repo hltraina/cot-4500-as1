@@ -101,17 +101,17 @@ def my_bisection(f, a, b, tol):
       raise Exception(
          "The scalars a and b do not bound a root")
     m = (a + b)/2
-    if np.abs(f(m)) < tol:
+    if np.abs(a -b) <= tol:
         # stopping condition, report m as root
-        return m
+        return 0
     elif np.sign(f(a)) == np.sign(f(m)):
         # case where m is an improvement on a. 
         # Make recursive call with a = m
-        return my_bisection(f, m, b, tol)
+        return my_bisection(f, m, b, tol) + 1
     elif np.sign(f(b)) == np.sign(f(m)):
         # case where m is an improvement on b. 
         # Make recursive call with b = m
-        return my_bisection(f, a, m, tol)
+        return my_bisection(f, a, m, tol) + 1
 def my_newton(f, df, x0, tol):
   result = f(x0) / df(x0)
   x = x0
@@ -121,9 +121,8 @@ def my_newton(f, df, x0, tol):
     count += 1
     result = f(x)/ df(x)
   return count
-f_x = lambda x: (x**3) - (4* (x**2)) - 10
-f_prime = lambda x: 3 * (x**2) - (8 * x)
+f_x = lambda x: (x**3) + (4* (x**2)) - 10
+f_prime = lambda x: 3 * (x**2) + (8 * x)
 
 print(my_bisection(f_x, -4, 7, .0001))
 print(my_newton(f_x, f_prime, 7, .0001))
-
