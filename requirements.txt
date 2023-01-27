@@ -1,2 +1,2 @@
-Run in Python
-Run using the 'numpy' package
+This code uses the "numpy" package in Python
+This code was developed using PyCharm
